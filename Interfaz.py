@@ -155,8 +155,9 @@ class VentanaPrincipal:
         bienvenida.config(bg="#82E0AA")
         bienvenida.resizable(False, False)
         bienvenida.grab_set()
-
+        #Etiquetas de bienvenida
         tk.Label(bienvenida, text=f"Nombre: {nombre}", bg="#82E0AA", fg="black",
                  font=("Cambria", 16)).pack(expand=True)
         tk.Label(bienvenida, text=f"Usuario: {usuario}", bg="#82E0AA", fg="black",
                  font=("Cambria", 16)).pack(expand=True)
+
