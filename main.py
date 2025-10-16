@@ -1,14 +1,16 @@
 import tkinter as tk
-from tkinter import messagebox
 from Interfaz import VentanaPrincipal
 from conexion import DBConexion
 import bcrypt
 
-def encriptar_contraseña(contraseña):
-    #Función para agregar sal
-    salt = bcrypt.gensalt()
-    #Funcion para crear un hash
-    return bcrypt.hashpw(contraseña.encode('utf-8'), salt)
+def encriptar_contraseña(contraseña:str, round=16) -> bytes:    
+    sal = bcrypt.gensalt(rounds=round)  
+    hash = bcrypt.hashpw(contraseña.encode('utf-8'),sal)    
+    print(f"Contraseña: {contraseña} del tipo: {type(contraseña)} caracteres {len(contraseña)}")
+    print(f"Sal: {sal} del tipo: {type(sal)} caracteres {len(sal)}")
+    print(f"Hash: {hash} del tipo: {type(hash)} caracteres {len(hash)}")    
+    return hash
+
 
 def verificar_contraseña(usuario, contraseña):
     db = DBConexion()
@@ -26,7 +28,6 @@ def main():
     #Crea la interfaz usando la clase del archivo Interfaz.py
     app = VentanaPrincipal(root, encriptar_contraseña, verificar_contraseña)
     root.mainloop()
-
 
 if __name__ == "__main__":
     main()
